@@ -17,10 +17,10 @@ server.listen(port)
 
 
 
-var conn1 = new sf.Connection({
+/*var conn1 = new sf.Connection({
   // you can change loginUrl to connect to sandbox or prerelease env.
    loginUrl : 'https://login.salesforce.com'
-});
+});*/
 
 
 var AbhijtdaUsername  = 'sudiptahalder@gmail.com.tcrm';
