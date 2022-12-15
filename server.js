@@ -70,6 +70,7 @@ app.use(function (req, res, next) {
     
     //responseObject.inboundUrl = req.path;
     console.log('Final Data' + responseObject);
+    console.log('Connection details'+ conn);
     conn.apex.post("/gateway/onFetchMode/", responseObject, function(res) {
     // the response object structure depends on the definition of apex class
     console.log('request sent back')
