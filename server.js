@@ -2,7 +2,7 @@ var WebSocketServer = require("ws").Server
 var http = require("http")
 var express = require("express")
 var app = express()
-var port = process.env.PORT || 6000
+var port = process.env.PORT || 5000
 var bodyParser = require('body-parser')
 app.use(bodyParser.json({limit: '25mb'}));
 app.use(bodyParser.urlencoded({limit: '25mb', extended: true}));
@@ -15,13 +15,17 @@ var server = http.createServer(app)
 console.log('port is'+ port);
 server.listen(port)
 
-
+var conn = new sf.Connection({
+  // you can change loginUrl to connect to sandbox or prerelease env.
+   loginUrl : 'https://login.salesforce.com'
+});
 
 /*var conn1 = new sf.Connection({
   // you can change loginUrl to connect to sandbox or prerelease env.
    loginUrl : 'https://login.salesforce.com'
 });*/
-
+var username = 'anuj.singh2@resourceful-bear-nxv21i.com'
+var password = 'Anuj1990J0IJpV8tW41sKfstnLOC6e6NH'
 
 var AbhijtdaUsername  = 'sudiptahalder@gmail.com.tcrm';
 var AbhijtdaPassword  = 'sudiptada123ed946uJXVfcXfbiBqlV2gA9FU';
@@ -38,7 +42,17 @@ var AbhijtdaPassword  = 'sudiptada123ed946uJXVfcXfbiBqlV2gA9FU';
   // ...
 });*/
 
-
+conn.login(username, password, function(err, userInfo) {
+  if (err) { return console.error(err); }
+  // Now you can get the access token and instance URL information.
+  // Save them to establish connection next time.
+  console.log(conn.accessToken);
+  console.log(conn.instanceUrl);
+  // logged in user property
+  console.log("User ID: " + userInfo.id);
+  console.log("Org ID: " + userInfo.organizationId);
+  // ...
+});
 
 app.use(function (req, res, next) {
   var responseObject;
@@ -56,35 +70,14 @@ app.use(function (req, res, next) {
     
     //responseObject.inboundUrl = req.path;
     console.log('Final Data' + responseObject);
-
-    var username = 'anuj.singh2@resourceful-bear-nxv21i.com'
-    var password = 'Anuj1990jOurfMaD8IBtqa5sTnvrdeszv'
-
-    var conn = new sf.Connection({
-      // you can change loginUrl to connect to sandbox or prerelease env.
-       loginUrl : 'https://login.salesforce.com'
-    });
-
-    conn.login(username, password, function(err, userInfo) {
-      if (err) { return console.error(err); }
-      // Now you can get the access token and instance URL information.
-      // Save them to establish connection next time.
-      console.log(conn.accessToken);
-      console.log(conn.instanceUrl);
-      // logged in user property
-      console.log("User ID: " + userInfo.id);
-      console.log("Org ID: " + userInfo.organizationId);
-      // ...
-    })
-    console.log('Connection details'+ conn);
     conn.apex.post("/gateway/onFetchMode/", responseObject, function(res) {
     // the response object structure depends on the definition of apex class
     console.log('request sent back')
     });
-    /*conn1.apex.post("/gateway/onFetchMode/", responseObject, function(res) {
+    conn1.apex.post("/gateway/onFetchMode/", responseObject, function(res) {
       // the response object structure depends on the definition of apex class
       console.log('request sent back')
-      });*/
+      });
   }
   
   next()
