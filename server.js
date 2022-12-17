@@ -74,10 +74,10 @@ app.use(function (req, res, next) {
     // the response object structure depends on the definition of apex class
     console.log('request sent back')
     });
-    conn1.apex.post("/gateway/onFetchMode/", responseObject, function(res) {
+    /*conn1.apex.post("/gateway/onFetchMode/", responseObject, function(res) {
       // the response object structure depends on the definition of apex class
       console.log('request sent back')
-      });
+      });*/
   }
   
   next()
