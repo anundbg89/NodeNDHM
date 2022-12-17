@@ -54,7 +54,7 @@ conn.login(username, password, function(err, userInfo) {
   // ...
 });
 
-app.use(function (req, res, next) {
+app.use(function (req, res) {
   var responseObject;
   const reqpath = req.path;
   if(reqpath.includes('Salesforce/NDHMEncrypt')){ 
@@ -80,7 +80,7 @@ app.use(function (req, res, next) {
       });*/
   }
   
-  next()
+  //next()
 })
 require('dns').lookup(require('os').hostname(), function (err, add, fam) {
   console.log('addr: ' + add);
