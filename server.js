@@ -17,18 +17,18 @@ server.listen(port)
 
 var conn = new sf.Connection({
   // you can change loginUrl to connect to sandbox or prerelease env.
-   loginUrl : 'https://login.salesforce.com'
+   loginUrl : 'https://perfectingpeds--ppeddev2.sandbox.my.salesforce.com/'
 });
 
 /*var conn1 = new sf.Connection({
   // you can change loginUrl to connect to sandbox or prerelease env.
-   loginUrl : 'https://login.salesforce.com'
+   loginUrl : 'https://perfectingpeds--ppeddev2.sandbox.my.salesforce.com/'
 });*/
-var username = 'anuj.singh2@resourceful-bear-nxv21i.com'
-var password = 'Anuj1990jOurfMaD8IBtqa5sTnvrdeszv'
+var username = 'hvats@perfectingpeds.com.ppeddev2'
+var password = 'Hellomrdj@129nNiMwQlZiurN6OUF66ba6a9V'
 
-var AbhijtdaUsername  = 'sudiptahalder@gmail.com.tcrm';
-var AbhijtdaPassword  = 'sudiptada123ed946uJXVfcXfbiBqlV2gA9FU';
+//var AbhijtdaUsername  = 'sudiptahalder@gmail.com.tcrm';
+//var AbhijtdaPassword  = 'sudiptada123ed946uJXVfcXfbiBqlV2gA9FU';
 
 /*conn1.login(AbhijtdaUsername, AbhijtdaPassword, function(err, userInfo) {
   if (err) { return console.error(err); }
@@ -57,7 +57,7 @@ conn.login(username, password, function(err, userInfo) {
 app.use(function (req, res) {
   var responseObject;
   const reqpath = req.path;
-  if(reqpath.includes('Salesforce/NDHMEncrypt')){ 
+  if(reqpath.includes('vonage/inbound')){ 
     console.log('Data to check' +req.body.dataToEncrypt)
     encryptDataFunc(req.body.dataToEncrypt)
     res.end(encryptDataFunc(req.body.dataToEncrypt)); 
